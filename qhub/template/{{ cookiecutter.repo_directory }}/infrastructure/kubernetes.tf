@@ -113,7 +113,7 @@ module "kubernetes-ingress" {
 
   node-group = local.node_groups.general
 {% else %}
-  source = "github.com/brl0/qhub-terraform-modules//modules/kind/ingress?ref=local_kind"
+  source = "github.com/brl0/qhub-terraform-modules//modules/kind/ingress?ref=local_update_dask_gateway"
 {% endif -%}
 
   dependencies = [
@@ -122,7 +122,7 @@ module "kubernetes-ingress" {
 }
 
 module "qhub" {
-  source = "github.com/quansight/qhub-terraform-modules//modules/kubernetes/services/meta/qhub"
+  source = "github.com/brl0/qhub-terraform-modules//modules/kubernetes/services/meta/qhub?ref=local_update_dask_gateway"
 
   name      = "qhub"
   namespace = var.environment
