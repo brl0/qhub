@@ -55,7 +55,7 @@ module "kubernetes-nfs-mount" {
 {% endif %}
 
 module "kubernetes-conda-store-server" {
-  source = "github.com/brl0/qhub-terraform-modules//modules/kubernetes/services/conda-store?ref=local_kind_merge_090"
+  source = "github.com/quansight/qhub-terraform-modules//modules/kubernetes/services/conda-store"
 
   name         = "conda-store"
   namespace    = var.environment
