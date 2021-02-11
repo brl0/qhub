@@ -122,7 +122,7 @@ module "kubernetes-ingress" {
 }
 
 module "qhub" {
-  source = "github.com/quansight/qhub-terraform-modules//modules/kubernetes/services/meta/qhub?ref=local_kind_merge_090"
+  source = "github.com/brl0/qhub-terraform-modules//modules/kubernetes/services/meta/qhub?ref=local_kind_merge_090"
 
   name      = "qhub"
   namespace = var.environment
