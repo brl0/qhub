@@ -85,6 +85,7 @@ provider "helm" {
     token                  = module.kubernetes.credentials.token
 {% else %}
     load_config_file       = true
+    debug                  = true
 {% endif %}
   }
   version = "1.0.0"
