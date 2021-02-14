@@ -77,6 +77,7 @@ module "kubernetes-conda-store-mount" {
 }
 
 provider "helm" {
+  debug = true
   kubernetes {
     host                   = module.kubernetes.credentials.endpoint
     cluster_ca_certificate = module.kubernetes.credentials.cluster_ca_certificate
@@ -85,7 +86,6 @@ provider "helm" {
     token                  = module.kubernetes.credentials.token
 {% else %}
     load_config_file       = true
-    debug                  = true
 {% endif %}
   }
   version = "1.0.0"
