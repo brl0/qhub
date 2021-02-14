@@ -175,6 +175,7 @@ DEFAULT_ENVIRONMENTS = {
             "numpy",
             "numba",
             "pandas",
+            "jupyter-server-proxy",
         ],
     }
 }
