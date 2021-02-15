@@ -106,6 +106,12 @@ module "kubernetes-autoscaling" {
 }
 {% endif -%}
 
+{% if cookiecutter.provider == "kind" -%}
+provider "k8s" {
+  load_config_file = true
+}
+{% endif -%}
+
 module "kubernetes-ingress" {
 {% if cookiecutter.provider != "kind" -%}
   source = "github.com/quansight/qhub-terraform-modules//modules/kubernetes/ingress"
@@ -114,7 +120,7 @@ module "kubernetes-ingress" {
 
   node-group = local.node_groups.general
 {% else %}
-  source = "github.com/brl0/qhub-terraform-modules//modules/kind/ingress?ref=local_kind_jhub_0111"
+  source = "github.com/brl0/qhub-terraform-modules//modules/kind/ingress?ref=nginx_0440"
 {% endif -%}
 
   dependencies = [
@@ -123,7 +129,7 @@ module "kubernetes-ingress" {
 }
 
 module "qhub" {
-  source = "github.com/brl0/qhub-terraform-modules//modules/kubernetes/services/meta/qhub?ref=local_kind_jhub_0111"
+  source = "github.com/brl0/qhub-terraform-modules//modules/kubernetes/services/meta/qhub?ref=nginx_0440"
 
   name      = "qhub"
   namespace = var.environment

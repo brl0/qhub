@@ -13,6 +13,10 @@ terraform {
     kind = {
       source = "kyma-incubator/kind"
       version = "0.0.7"
+    }
+    k8s = {
+      source = "banzaicloud/k8s"
+      version = "0.9.0"
 {% endif %}
     }
     helm = {
