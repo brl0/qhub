@@ -114,7 +114,7 @@ module "kubernetes-ingress" {
 
   node-group = local.node_groups.general
 {% else %}
-  source = "github.com/brl0/qhub-terraform-modules//modules/kind/ingress?ref=local_kind_jhub_0111"
+  source = "github.com/brl0/qhub-terraform-modules//modules/kind/ingress?ref=nginx_0440_1"
 {% endif -%}
 
   dependencies = [
@@ -123,7 +123,7 @@ module "kubernetes-ingress" {
 }
 
 module "qhub" {
-  source = "github.com/brl0/qhub-terraform-modules//modules/kubernetes/services/meta/qhub?ref=local_kind_jhub_0111"
+  source = "github.com/brl0/qhub-terraform-modules//modules/kubernetes/services/meta/qhub?ref=nginx_0440_1"
 
   name      = "qhub"
   namespace = var.environment
