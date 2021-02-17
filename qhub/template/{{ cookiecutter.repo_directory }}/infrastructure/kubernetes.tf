@@ -37,11 +37,12 @@ module "kubernetes-nfs-mount" {
 }
 {% else -%}
 module "kubernetes-nfs-server" {
-  source = "github.com/quansight/qhub-terraform-modules//modules/kubernetes/nfs-server"
+  source = "github.com/brl0/qhub-terraform-modules//modules/kubernetes/nfs-server?ref=test_affinity"
 
   name         = "nfs-server"
   namespace    = var.environment
   nfs_capacity = "{{ cookiecutter.storage.shared_filesystem }}"
+  node-group   = local.node_groups.general
 }
 
 module "kubernetes-nfs-mount" {
