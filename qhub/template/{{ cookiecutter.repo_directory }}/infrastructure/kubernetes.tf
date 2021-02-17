@@ -55,7 +55,7 @@ module "kubernetes-nfs-mount" {
 {% endif %}
 
 module "kubernetes-conda-store-server" {
-  source = "github.com/quansight/qhub-terraform-modules//modules/kubernetes/services/conda-store"
+  source = "github.com/brl0/qhub-terraform-modules//modules/kubernetes/services/conda-store?ref=test_affinity"
 
   name         = "conda-store"
   namespace    = var.environment
@@ -114,7 +114,7 @@ module "kubernetes-ingress" {
 
   node-group = local.node_groups.general
 {% else %}
-  source = "github.com/brl0/qhub-terraform-modules//modules/kind/ingress?ref=local_kind_dg_jh"
+  source = "github.com/brl0/qhub-terraform-modules//modules/kind/ingress?ref=test_affinity"
 {% endif -%}
 
   dependencies = [
@@ -123,7 +123,7 @@ module "kubernetes-ingress" {
 }
 
 module "qhub" {
-  source = "github.com/brl0/qhub-terraform-modules//modules/kubernetes/services/meta/qhub?ref=local_kind_dg_jh"
+  source = "github.com/brl0/qhub-terraform-modules//modules/kubernetes/services/meta/qhub?ref=test_affinity"
 
   name      = "qhub"
   namespace = var.environment
