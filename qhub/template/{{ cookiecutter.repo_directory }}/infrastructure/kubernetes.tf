@@ -113,7 +113,7 @@ module "kubernetes-ingress" {
 
   node-group = local.node_groups.general
 {% else %}
-  source = "github.com/brl0/qhub-terraform-modules//modules/kind/ingress?ref=local_kind"
+  source = "github.com/brl0/qhub-terraform-modules//modules/kind/ingress?ref=local_kind_ingress_helm"
 {% endif -%}
 
   dependencies = [
