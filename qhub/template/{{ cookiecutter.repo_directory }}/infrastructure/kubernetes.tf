@@ -37,7 +37,7 @@ module "kubernetes-nfs-mount" {
 }
 {% else -%}
 module "kubernetes-nfs-server" {
-  source = "github.com/brl0/qhub-terraform-modules//modules/kubernetes/nfs-server?ref=local_kind_dg_jh"
+  source = "github.com/brl0/qhub-terraform-modules//modules/kubernetes/nfs-server?ref=cert_manager"
 
   name         = "nfs-server"
   namespace    = var.environment
@@ -56,7 +56,7 @@ module "kubernetes-nfs-mount" {
 {% endif %}
 
 module "kubernetes-conda-store-server" {
-  source = "github.com/brl0/qhub-terraform-modules//modules/kubernetes/services/conda-store?ref=local_kind_dg_jh"
+  source = "github.com/brl0/qhub-terraform-modules//modules/kubernetes/services/conda-store?ref=cert_manager"
 
   name         = "conda-store"
   namespace    = var.environment
@@ -115,7 +115,7 @@ module "kubernetes-ingress" {
 
   node-group = local.node_groups.general
 {% else %}
-  source = "github.com/brl0/qhub-terraform-modules//modules/kind/ingress?ref=local_kind_dg_jh"
+  source = "github.com/brl0/qhub-terraform-modules//modules/kind/ingress?ref=cert_manager"
 {% endif -%}
 
   dependencies = [
@@ -124,7 +124,7 @@ module "kubernetes-ingress" {
 }
 
 module "qhub" {
-  source = "github.com/brl0/qhub-terraform-modules//modules/kubernetes/services/meta/qhub?ref=local_kind_dg_jh"
+  source = "github.com/brl0/qhub-terraform-modules//modules/kubernetes/services/meta/qhub?ref=cert_manager"
 
   name      = "qhub"
   namespace = var.environment
