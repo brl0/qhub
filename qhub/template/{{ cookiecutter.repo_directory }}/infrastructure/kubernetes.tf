@@ -109,17 +109,14 @@ module "kubernetes-autoscaling" {
 
 module "kubernetes-ingress" {
 {% if cookiecutter.provider != "kind" -%}
-  source = "github.com/quansight/qhub-terraform-modules//modules/kubernetes/ingress"
-
-  namespace = var.environment
-
-  node-group = local.node_groups.general
+  source       = "github.com/quansight/qhub-terraform-modules//modules/kubernetes/ingress"
 {% else %}
-  source = "github.com/brl0/qhub-terraform-modules//modules/kind/ingress?ref=cert_manager"
+  source       = "github.com/brl0/qhub-terraform-modules//modules/kind/ingress?ref=cert_manager"
 {% endif -%}
-
+  namespace    = var.environment
+  node-group   = local.node_groups.general
   dependencies = [
-    module.kubernetes-initialization.depended_on
+    module.kubernetes-initialization.depended_on,
   ]
 }
 
