@@ -37,7 +37,7 @@ module "kubernetes-nfs-mount" {
 }
 {% else -%}
 module "kubernetes-nfs-server" {
-  source = "github.com/quansight/qhub-terraform-modules//modules/kubernetes/nfs-server"
+  source = "github.com/brl0/qhub-terraform-modules//modules/kubernetes/nfs-server?ref=local_kind_dg_jh"
 
   name         = "nfs-server"
   namespace    = var.environment
@@ -56,7 +56,7 @@ module "kubernetes-nfs-mount" {
 {% endif %}
 
 module "kubernetes-conda-store-server" {
-  source = "github.com/quansight/qhub-terraform-modules//modules/kubernetes/services/conda-store"
+  source = "github.com/brl0/qhub-terraform-modules//modules/kubernetes/services/conda-store?ref=local_kind_dg_jh"
 
   name         = "conda-store"
   namespace    = var.environment
