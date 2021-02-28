@@ -122,12 +122,12 @@ module "kubernetes-autoscaling" {
 
 module "kubernetes-ingress" {
 {% if cookiecutter.provider != "kind" -%}
-  source = "{{ cookiecutter.terraform_modules.repository }}//modules/kubernetes/ingress?ref={{ cookiecutter.terraform_modules.rev }}"
-{% else %}
-  source = "{{ cookiecutter.terraform_modules.repository }}//modules/kind/ingress?ref={{ cookiecutter.terraform_modules.rev }}"
-{% endif -%}
-  namespace = var.environment
+  source     = "{{ cookiecutter.terraform_modules.repository }}//modules/kubernetes/ingress?ref={{ cookiecutter.terraform_modules.rev }}"
   node-group = local.node_groups.general
+{% else %}
+  source     = "{{ cookiecutter.terraform_modules.repository }}//modules/kind/ingress?ref={{ cookiecutter.terraform_modules.rev }}"
+{% endif -%}
+  namespace  = var.environment
   depends_on = [
     module.kubernetes-initialization
   ]
