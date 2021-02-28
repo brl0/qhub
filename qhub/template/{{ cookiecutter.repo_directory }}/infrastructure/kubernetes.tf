@@ -36,11 +36,10 @@ module "kubernetes-nfs-mount" {
 {% else -%}
 module "kubernetes-nfs-server" {
   source = "{{ cookiecutter.terraform_modules.repository }}//modules/kubernetes/nfs-server?ref={{ cookiecutter.terraform_modules.rev }}"
-
   name         = "nfs-server"
   namespace    = var.environment
   nfs_capacity = "{{ cookiecutter.storage.shared_filesystem }}"
-
+  node-group   = local.node_groups.general
   depends_on = [
     module.kubernetes-initialization
   ]
@@ -48,12 +47,11 @@ module "kubernetes-nfs-server" {
 
 module "kubernetes-nfs-mount" {
   source = "{{ cookiecutter.terraform_modules.repository }}//modules/kubernetes/nfs-mount?ref={{ cookiecutter.terraform_modules.rev }}"
-
   name         = "nfs-mount"
   namespace    = var.environment
   nfs_capacity = "{{ cookiecutter.storage.shared_filesystem }}"
   nfs_endpoint = module.kubernetes-nfs-server.endpoint_ip
-
+  node-group   = local.node_groups.general
   depends_on = [
     module.kubernetes-nfs-server
   ]
