@@ -5,9 +5,6 @@ provider "kubernetes" {
   config_path    = "~/.kube/config"
   config_context = "kind-{{ cookiecutter.project_name }}-dev"
   insecure       = true
-  depends_on     = [
-    module.kubernetes
-  ]
 {% else %}
   host                   = module.kubernetes.credentials.endpoint
   token                  = module.kubernetes.credentials.token
@@ -17,11 +14,12 @@ provider "kubernetes" {
 
 module "kubernetes-initialization" {
   source = "{{ cookiecutter.terraform_modules.repository }}//modules/kubernetes/initialization?ref={{ cookiecutter.terraform_modules.rev }}"
-
   namespace = var.environment
   secrets   = []
+  depends_on     = [
+    module.kubernetes
+  ]
 }
-
 
 {% if cookiecutter.provider == "aws" -%}
 module "kubernetes-nfs-mount" {
