@@ -5,6 +5,9 @@ provider "kubernetes" {
   config_path    = "~/.kube/config"
   config_context = "kind-{{ cookiecutter.project_name }}-dev"
   insecure       = true
+  depends_on     = [
+    module.kubernetes
+  ]
 {% else %}
   host                   = module.kubernetes.credentials.endpoint
   token                  = module.kubernetes.credentials.token
