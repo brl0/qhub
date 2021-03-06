@@ -1,13 +1,13 @@
 provider "kubernetes" {
 {% if cookiecutter.provider == "local" %}
   config_path = "~/.kube/config"
+{% elif cookiecutter.provider == "kind" %}
+  host           = module.kubernetes.credentials.endpoint
+  config_path    = "~/.kube/config"
+  config_context = "kind-{{ cookiecutter.project_name }}-dev"
+  insecure       = true
 {% else %}
   host                   = module.kubernetes.credentials.endpoint
-{% if cookiecutter.provider == "kind" %}
-  config_path            = "~/.kube/config"
-  config_context         = "kind-{{ cookiecutter.project_name }}-dev"
-  insecure               = true
-{% else -%}
   token                  = module.kubernetes.credentials.token
   cluster_ca_certificate = module.kubernetes.credentials.cluster_ca_certificate
 {% endif %}
